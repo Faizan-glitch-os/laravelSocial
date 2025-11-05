@@ -6,8 +6,14 @@ use Illuminate\Http\Request;
 
 class RouteController
 {
-    public function homePage()
+    public function showCorrectHomepage()
     {
-        return view('homepage');
+        $isLoggedIn = auth()->guard('web')->check();
+
+        if ($isLoggedIn) {
+            return view('homepage-loggedin');
+        } else {
+            return view('homepage-loggedout');
+        }
     }
 }
