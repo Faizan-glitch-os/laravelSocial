@@ -12,6 +12,21 @@ class PostController
         return view('create-post');
     }
 
+    public function viewPost(Post $post)
+    {
+        return view('single-post', ['post' => $post]);
+    }
+
+    public function showEditPost(Post $post)
+    {
+        return view('edit-post', ['post' => $post]);
+    }
+
+    public function editPost(Request $request)
+    {
+        return 'updated';
+    }
+
     public function createPost(Request $request)
     {
         $userPost = $request->validate(['title' => 'required', 'body' => 'required']);
@@ -19,8 +34,8 @@ class PostController
         $userPost['body'] = strip_tags($userPost['body']);
         $userPost['user_id'] = auth()->guard('web')->id();
 
-        Post::create($userPost);
+        $newPost = Post::create($userPost);
 
-        return redirect('/')->with(['message' => 'Post created Successfully', 'status' => 'success']);
+        return redirect('/post/' . $newPost->id)->with(['message' => 'Post created Successfully', 'status' => 'success']);
     }
 }
