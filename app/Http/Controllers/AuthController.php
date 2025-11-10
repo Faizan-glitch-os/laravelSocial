@@ -9,6 +9,15 @@ use Illuminate\Validation\Rules\Password;
 
 class AuthController
 {
+    public function showProfile(User $user)
+    {
+        $posts = $user->userPosts()->latest()->get();
+        $userName = $user->username;
+        $postsCount = $user->userPosts()->get()->count();
+
+        return view('profile', ['posts' => $posts, 'userName' => $userName, 'postsCount' => $postsCount]);
+    }
+
     public function register(Request $request)
     {
         $userData = $request->validate([
