@@ -17,6 +17,8 @@ Route::delete('/post/{post}/delete', [PostController::class, 'deletePost'])->mid
 
 Route::get('/', [RouteController::class, 'showCorrectHomepage'])->name('login');
 
+Route::get('/profile/upload-avatar', [RouteController::class, 'showAvatarForm']);
+Route::post('/profile/upload-avatar', [RouteController::class, 'uploadAvatar']);
 Route::post('/register', [AuthController::class, 'register'])->middleware('guest');
 Route::post('/login', [AuthController::class, 'login'])->middleware('guest');
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');

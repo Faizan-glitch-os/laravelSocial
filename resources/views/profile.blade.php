@@ -5,6 +5,7 @@
         <form class="ml-2 d-inline" action="#" method="POST">
           <button class="btn btn-primary btn-sm">Follow <i class="fas fa-user-plus"></i></button>
           <!-- <button class="btn btn-danger btn-sm">Stop Following <i class="fas fa-user-times"></i></button> -->
+          <a href="/profile/upload-avatar" class="btn btn-secondary">Manage Avatar</a>
         </form>
       </h2>
 

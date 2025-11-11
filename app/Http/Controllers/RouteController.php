@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManager;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class RouteController
 {
@@ -15,5 +18,27 @@ class RouteController
         } else {
             return view('homepage-loggedout');
         }
+    }
+
+    public function showAvatarForm()
+    {
+        return view('avatar-form');
+    }
+
+    public function uploadAvatar(Request $request)
+    {
+        $request->validate(['avatar' => 'required|image|max:5000']);
+
+        $fileName = auth()->guard('web')->user()->id . '-' . uniqid() . '.jpg';
+
+        $manager = new ImageManager(new Driver());
+
+        $avatar = $manager->read($request->file('avatar'));
+
+        $toJpeg = $avatar->cover(width: 500, height: 500)->toJpeg();
+
+        Storage::disk('public')->put('avatars/' . $fileName, $toJpeg);
+
+        return redirect('/profile/' . auth()->guard('web')->user()->id)->with(['message' => 'Avatar Updated Successfully', 'status' => 'success']);
     }
 }
