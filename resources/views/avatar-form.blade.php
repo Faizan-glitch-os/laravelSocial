@@ -10,6 +10,9 @@
                         </label>
                         <input type="file" name="avatar" id="avatar" class="form-control" required>
                     </div>
+                    @error('avatar')
+                    <p class="alert alert-danger small">{{ $message }} </p>
+                    @enderror
                     <button class="btn btn-primary text-sm">Upload</button>
                 </form>
             </div>
