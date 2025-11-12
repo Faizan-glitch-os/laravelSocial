@@ -22,4 +22,4 @@ Route::post('/profile/upload-avatar', [RouteController::class, 'uploadAvatar'])-
 Route::post('/register', [AuthController::class, 'register'])->middleware('guest');
 Route::post('/login', [AuthController::class, 'login'])->middleware('guest');
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
-Route::get('/profile/{user}', [AuthController::class, 'showProfile'])->middleware(['auth', 'can:view,user']);
+Route::get('/profile/{user}', [AuthController::class, 'showProfile'])->middleware(['auth']);

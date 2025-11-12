@@ -15,7 +15,7 @@
       </div>
 
       <p class="text-muted small mb-4">
-        <a href="#"><img class="avatar-tiny" src="{{ auth()->guard('web')->user()->avatar }}" /></a>
+        <a href="#"><img class="avatar-tiny" src="{{ $post->userBelongs->avatar }}" /></a>
         Posted by <a href="#">{{ $post->userBelongs->username }}</a> on {{ $post->created_at->format('n/j/Y') }}
       </p>
 

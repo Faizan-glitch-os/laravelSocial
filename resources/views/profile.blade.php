@@ -1,11 +1,13 @@
 <x-layout>
     <div class="container py-md-5 container--narrow">
       <h2>
-        <img class="avatar-small" src="{{ auth()->guard('web')->user()->avatar }}" /> {{ $userName }}
+        <img class="avatar-small" src="{{ $user->avatar }}" /> {{ $user->username }}
         <form class="ml-2 d-inline" action="#" method="POST">
           <button class="btn btn-primary btn-sm">Follow <i class="fas fa-user-plus"></i></button>
           <!-- <button class="btn btn-danger btn-sm">Stop Following <i class="fas fa-user-times"></i></button> -->
-          <a href="/profile/upload-avatar" class="btn btn-secondary">Manage Avatar</a>
+          @can('view', $user)
+            <a href="/profile/upload-avatar" class="btn btn-secondary">Manage Avatar</a>
+          @endcan
         </form>
       </h2>
 
@@ -18,7 +20,7 @@
       <div class="list-group">
         @foreach($posts as $post)
         <a href="/post/{{ $post->id }}/view" class="list-group-item list-group-item-action">
-          <img class="avatar-tiny" src="{{ auth()->guard('web')->user()->avatar }}" />
+          <img class="avatar-tiny" src="{{ $user->avatar }}" />
           <strong>{{ $post->title }}</strong> on {{ $post->created_at->format('n/j/Y') }}
         </a>
         @endforeach
