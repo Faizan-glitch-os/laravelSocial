@@ -56,7 +56,7 @@
       <div id="autoDismissibleAlert"
        role="alert"
        @class([
-        'container container--narrow alert alert-dismmisible text-center fade show',
+        'alert alert-dismissible text-center fade show',
         'alert-success' => session('status') === 'success',
         'alert-danger' => session('status') === 'failed',
        ])>

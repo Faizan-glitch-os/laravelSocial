@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RouteController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FollowController;
 
 Route::get('/post/create', [PostController::class, 'showCreatePost'])->middleware('auth');
 Route::post('/post/create', [PostController::class, 'createPost'])->middleware('auth');
@@ -16,6 +17,9 @@ Route::put('/post/{post}/edit', [PostController::class, 'editPost'])->middleware
 Route::delete('/post/{post}/delete', [PostController::class, 'deletePost'])->middleware(['auth', 'can:delete,post']);
 
 Route::get('/', [RouteController::class, 'showCorrectHomepage'])->name('login');
+
+Route::post('/profile/{user}/follow', [FollowController::class, 'follow'])->middleware('auth');
+Route::post('/profile/{user}/unfollow', [FollowController::class, 'unFollow'])->middleware('auth');
 
 Route::get('/profile/upload-avatar', [RouteController::class, 'showAvatarForm'])->middleware('auth');
 Route::post('/profile/upload-avatar', [RouteController::class, 'uploadAvatar'])->middleware('auth');

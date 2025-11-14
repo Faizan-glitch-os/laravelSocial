@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Follow;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -14,7 +15,9 @@ class AuthController
         $posts = $user->userPosts()->latest()->get();
         $postsCount = $user->userPosts()->get()->count();
 
-        return view('profile', ['posts' => $posts, 'user' => $user, 'postsCount' => $postsCount]);
+        $isFollowed = Follow::where([['user_id', '=', auth('web')->user()->id], ['followed_user_id', '=', $user->id]])->count();
+
+        return view('profile', ['posts' => $posts, 'user' => $user, 'postsCount' => $postsCount, 'isFollowed' => $isFollowed]);
     }
 
     public function register(Request $request)

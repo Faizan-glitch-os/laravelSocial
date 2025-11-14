@@ -2,13 +2,22 @@
     <div class="container py-md-5 container--narrow">
       <h2>
         <img class="avatar-small" src="{{ $user->avatar }}" /> {{ $user->username }}
-        <form class="ml-2 d-inline" action="#" method="POST">
-          <button class="btn btn-primary btn-sm">Follow <i class="fas fa-user-plus"></i></button>
-          <!-- <button class="btn btn-danger btn-sm">Stop Following <i class="fas fa-user-times"></i></button> -->
+          @cannot('view', $user)
+          @if ($isFollowed)
+            <form class="ml-2 d-inline" action="/profile/{{ $user->id }}/unfollow" method="POST">
+            @csrf
+              <button class="btn btn-danger btn-sm">Stop Following <i class="fas fa-user-times"></i></button>
+            </form>
+          @else
+            <form class="ml-2 d-inline" action="/profile/{{ $user->id }}/follow" method="POST">
+            @csrf
+              <button class="btn btn-primary btn-sm">Follow <i class="fas fa-user-plus"></i></button>
+            </form>
+          @endif
+          @endcannot
           @can('view', $user)
-            <a href="/profile/upload-avatar" class="btn btn-secondary">Manage Avatar</a>
+            <a href="/profile/upload-avatar" class="btn btn-secondary btn-sm">Manage Avatar</a>
           @endcan
-        </form>
       </h2>
 
       <div class="profile-nav nav nav-tabs pt-2 mb-4">
