@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout docTitle="Create Post">
   <div class="container py-md-5 container--narrow">
       <form action="/post/create" method="POST">
         @csrf

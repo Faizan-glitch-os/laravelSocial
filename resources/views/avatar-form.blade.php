@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout docTitle="Manage Avatar">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-6">

@@ -23,8 +23,7 @@ class RouteController
 
     public function showAvatarForm()
     {
-        $docTitle = 'Manage Avatar';
-        return view('avatar-form', ['docTitle' => $docTitle]);
+        return view('avatar-form');
     }
 
     public function uploadAvatar(Request $request)
