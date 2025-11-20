@@ -14,7 +14,8 @@ class RouteController
         $isLoggedIn = auth()->guard('web')->check();
 
         if ($isLoggedIn) {
-            return view('homepage-loggedin');
+            $posts = auth()->guard('web')->user()->feedPosts()->latest()->get();
+            return view('homepage-loggedin', ['posts' => $posts]);
         } else {
             return view('homepage-loggedout');
         }
@@ -22,7 +23,8 @@ class RouteController
 
     public function showAvatarForm()
     {
-        return view('avatar-form');
+        $docTitle = 'Manage Avatar';
+        return view('avatar-form', ['docTitle' => $docTitle]);
     }
 
     public function uploadAvatar(Request $request)

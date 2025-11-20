@@ -27,6 +27,8 @@ body,
 .avatar-small {
   width: 32px;
   height: 32px;
+  border: #212529 1px solid;
+  padding: 1px;
   border-radius: 16px;
   margin-right: 5px;
   position: relative;
@@ -36,6 +38,8 @@ body,
 .avatar-tiny {
   width: 24px;
   height: 24px;
+  border: #212529 1px solid;
+  padding: 1px;
   border-radius: 12px;
   margin-right: 4px;
   position: relative;
