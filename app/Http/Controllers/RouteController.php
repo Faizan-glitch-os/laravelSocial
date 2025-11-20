@@ -14,7 +14,7 @@ class RouteController
         $isLoggedIn = auth()->guard('web')->check();
 
         if ($isLoggedIn) {
-            $posts = auth()->guard('web')->user()->feedPosts()->latest()->get();
+            $posts = auth()->guard('web')->user()->feedPosts()->latest()->paginate(5);
             return view('homepage-loggedin', ['posts' => $posts]);
         } else {
             return view('homepage-loggedout');
