@@ -5,19 +5,51 @@ namespace App\Http\Controllers;
 use App\Models\Follow;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
 class AuthController
 {
+    private function sharedData($user)
+    {
+
+        $postsCount = $user->userPosts()->get()->count();
+        $followers = $user->followers()->get()->count();
+        $following = $user->following()->get()->count();
+        $isFollowed = Follow::where([['user_id', '=', auth('web')->user()->id], ['followed_user_id', '=', $user->id]])->count();
+
+        View::share('sharedData', [
+            'user' => $user,
+            'postsCount' => $postsCount,
+            'isFollowed' => $isFollowed,
+            'followers' => $followers,
+            'following' => $following
+        ]);
+    }
+
     public function showProfile(User $user)
     {
         $posts = $user->userPosts()->latest()->get();
-        $postsCount = $user->userPosts()->get()->count();
+        $this->sharedData($user);
 
-        $isFollowed = Follow::where([['user_id', '=', auth('web')->user()->id], ['followed_user_id', '=', $user->id]])->count();
+        return view('profile-posts', ['posts' => $posts]);
+    }
 
-        return view('profile', ['posts' => $posts, 'user' => $user, 'postsCount' => $postsCount, 'isFollowed' => $isFollowed]);
+    public function showFollowers(User $user)
+    {
+        $this->sharedData($user);
+        $followers = $user->followers()->latest()->get();
+
+        return view('profile-followers', ['followers' => $followers]);
+    }
+
+    public function showFollowing(User $user)
+    {
+        $this->sharedData($user);
+        $following = $user->following()->latest()->get();
+
+        return view('profile-following', ['following' => $following]);
     }
 
     public function register(Request $request)

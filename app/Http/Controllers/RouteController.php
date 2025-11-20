@@ -50,6 +50,6 @@ class RouteController
             Storage::disk('public')->delete('avatars/' . $oldAvatar);
         }
 
-        return back()->with(['message' => 'Avatar Updated Successfully', 'status' => 'success']);
+        return redirect('/')->with(['message' => 'Avatar Updated Successfully', 'status' => 'success']);
     }
 }

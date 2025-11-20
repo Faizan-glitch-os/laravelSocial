@@ -20,6 +20,8 @@ Route::get('/', [RouteController::class, 'showCorrectHomepage'])->name('login');
 
 Route::post('/profile/{user}/follow', [FollowController::class, 'follow'])->middleware('auth');
 Route::post('/profile/{user}/unfollow', [FollowController::class, 'unFollow'])->middleware('auth');
+Route::get('/profile/{user}/followers', [AuthController::class, 'showFollowers'])->middleware('auth');
+Route::get('/profile/{user}/following', [AuthController::class, 'showFollowing'])->middleware('auth');
 
 Route::get('/profile/upload-avatar', [RouteController::class, 'showAvatarForm'])->middleware('auth');
 Route::post('/profile/upload-avatar', [RouteController::class, 'uploadAvatar'])->middleware('auth');
