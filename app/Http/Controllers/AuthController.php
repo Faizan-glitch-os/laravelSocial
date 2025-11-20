@@ -30,7 +30,7 @@ class AuthController
 
     public function showProfile(User $user)
     {
-        $posts = $user->userPosts()->latest()->get();
+        $posts = $user->userPosts()->latest()->paginate(5);
         $this->sharedData($user);
 
         return view('profile-posts', ['posts' => $posts]);
@@ -39,7 +39,7 @@ class AuthController
     public function showFollowers(User $user)
     {
         $this->sharedData($user);
-        $followers = $user->followers()->latest()->get();
+        $followers = $user->followers()->latest()->paginate(5);
 
         return view('profile-followers', ['followers' => $followers]);
     }
@@ -47,7 +47,7 @@ class AuthController
     public function showFollowing(User $user)
     {
         $this->sharedData($user);
-        $following = $user->following()->latest()->get();
+        $following = $user->following()->latest()->paginate(5);
 
         return view('profile-following', ['following' => $following]);
     }

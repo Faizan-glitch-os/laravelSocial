@@ -7,5 +7,5 @@
         </a>
         @endforeach
       </div>
-    </div>
+      {{ $following->links() }}
 </x-profile>

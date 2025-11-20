@@ -7,5 +7,5 @@
         </a>
         @endforeach
       </div>
-    </div>
+      {{ $posts->links() }}
 </x-profile>
