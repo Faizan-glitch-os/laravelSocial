@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class PostController
 {
+    public function search($term)
+    {
+        $search = Post::search($term)->get();
+        $search = $search->load('userBelongs:id,username,avatar');
+        return $search;
+    }
+
     public function showCreatePost()
     {
         return view('create-post');
