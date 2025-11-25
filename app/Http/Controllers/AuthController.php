@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\AuthEvent;
 use App\Models\Follow;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -73,7 +72,6 @@ class AuthController
 
         if ($isLoggedIn) {
             $request->session()->regenerate();
-            event(new AuthEvent(auth('web')->user()->username, 'logged in'));
             return redirect('/')->with(['message' => 'Successfully Logged In', 'status' => 'success']);
         } else {
             return redirect('/')->with(['message' => 'Failed to Logged In', 'status' => 'failed']);
@@ -82,7 +80,6 @@ class AuthController
 
     public function logout()
     {
-        event(new AuthEvent(auth('web')->user()->username, 'logged out'));
         auth()->guard('web')->logout();
         return redirect('/')->with(['message' => 'Successfully Logged Out', 'status' => 'success']);
     }

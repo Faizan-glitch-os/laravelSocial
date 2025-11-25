@@ -1,10 +1,12 @@
 <?php
 
+use App\Events\ChatEvent;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\FollowController;
+use Illuminate\Http\Request;
 
 Route::get('/post/create', [PostController::class, 'showCreatePost'])->middleware('auth');
 Route::post('/post/create', [PostController::class, 'createPost'])->middleware('auth');
@@ -30,3 +32,11 @@ Route::post('/register', [AuthController::class, 'register'])->middleware('guest
 Route::post('/login', [AuthController::class, 'login'])->middleware('guest');
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
 Route::get('/profile/{user}', [AuthController::class, 'showProfile'])->middleware(['auth']);
+
+Route::post('/chat', function (Request $request) {
+    $formField = $request->validate(['message' => 'required']);
+    if (!trim(strip_tags($formField['message']))) response()->noContent();
+
+    broadcast(new ChatEvent(['username' => auth('web')->user()->username, 'avatar' => auth('web')->user()->avatar, 'message' => $formField['message']]))->toOthers();
+    response()->noContent();
+})->middleware('auth');
