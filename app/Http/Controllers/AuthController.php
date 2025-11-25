@@ -11,6 +11,13 @@ use Illuminate\Validation\Rules\Password;
 
 class AuthController
 {
+    public function searchUser($term)
+    {
+        $users = User::search($term)->get();
+
+        return $users;
+    }
+
     private function sharedData($user)
     {
 

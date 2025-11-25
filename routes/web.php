@@ -19,7 +19,8 @@ Route::put('/post/{post}/edit', [PostController::class, 'editPost'])->middleware
 Route::delete('/post/{post}/delete', [PostController::class, 'deletePost'])->middleware(['auth', 'can:delete,post']);
 
 Route::get('/', [RouteController::class, 'showCorrectHomepage'])->name('login');
-Route::get('/search/{term}', [PostController::class, 'search'])->middleware('auth');
+// Route::get('/search/{term}', [PostController::class, 'search'])->middleware('auth');
+Route::get('/search-user/{term}', [AuthController::class, 'searchUser'])->middleware('auth');
 
 Route::post('/profile/{user}/follow', [FollowController::class, 'follow'])->middleware('auth');
 Route::post('/profile/{user}/unfollow', [FollowController::class, 'unFollow'])->middleware('auth');
