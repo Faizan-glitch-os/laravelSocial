@@ -24,8 +24,8 @@
         <h4 class="my-0 mr-md-auto font-weight-normal"><a href="/" class="text-white">OurApp</a></h4>
         @auth
         <livewire:search />
-          <div class="flex-row my-3 my-md-0">
-            <span class="text-white mr-2 header-chat-icon" title="Chat" data-toggle="tooltip" data-placement="bottom"><i class="fas fa-comment"></i></span>
+        <livewire:chat />
+        <div class="flex-row my-3 my-md-0">
             <a href="/profile/{{ auth()->guard('web')->user()->id }}" class="mr-2">
               <img title="My Profile"
               data-toggle="tooltip"
@@ -75,10 +75,6 @@
     <footer class="border-top text-center small text-muted py-3">
         <p class="m-0">Copyright &copy; 2022 <a href="/" class="text-muted">OurApp</a>. All rights reserved.</p>
     </footer>
-
-    @auth
-      <div data-username = {{ auth()->user()->username }} data-avatar = {{ auth()->user()->avatar }} id="chat-wrapper" class="chat-wrapper shadow border-top border-start border-end"></div>
-    @endauth
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
