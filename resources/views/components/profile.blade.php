@@ -4,10 +4,7 @@
         <img class="avatar-small" src="{{ $sharedData['user']->avatar }}" /> {{ $sharedData['user']->username }}
           @cannot('view', $sharedData['user'])
           @if ($sharedData['isFollowed'])
-            <form class="ml-2 d-inline" action="/profile/{{ $sharedData['user']->id }}/unfollow" method="POST">
-            @csrf
-              <button class="btn btn-danger btn-sm">Stop Following <i class="fas fa-user-times"></i></button>
-            </form>
+            <livewire:remove-follow :userId="$sharedData['user']->id" />
           @else
             <livewire:add-follow :userId="$sharedData['user']->id"/>
           @endif
