@@ -4,7 +4,7 @@
     <h2 class="text-center">Posts from Users you are following</h2>
       <div class="list-group">
         @foreach($posts as $post)
-        <a href="/post/{{ $post->id }}/view" class="list-group-item list-group-item-action">
+        <a wire:navigate href="/post/{{ $post->id }}/view" class="list-group-item list-group-item-action">
           <img class="avatar-tiny" src="{{ $post->userBelongs->avatar }}" />
           <strong>{{ $post->title }} </strong><span class="text-muted small">by {{ $post->userBelongs->username }} on {{ $post->created_at->format('n/j/Y') }}</span>
         </a>

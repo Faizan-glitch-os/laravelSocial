@@ -21,19 +21,25 @@
   <body>
     <header class="header-bar mb-3">
       <div class="container d-flex flex-column flex-md-row align-items-center p-3">
-        <h4 class="my-0 mr-md-auto font-weight-normal"><a href="/" class="text-white">OurApp</a></h4>
+        <h4 class="my-0 mr-md-auto font-weight-normal">
+          <a wire:navigate href="/" class="text-white">OurApp</a>
+        </h4>
         @auth
+
+        @persist('headerDynamic')
         <livewire:search />
         <livewire:chat />
+        @endpersist()
+
         <div class="flex-row my-3 my-md-0">
-            <a href="/profile/{{ auth()->guard('web')->user()->id }}" class="mr-2">
+            <a wire:navigate href="/profile/{{ auth()->guard('web')->user()->id }}" class="mr-2">
               <img title="My Profile"
               data-toggle="tooltip"
               data-placement="bottom"
               style="width: 32px; height: 32px; border-radius: 16px; border: #212529 1px solid; padding: 1px;"
               src="{{ auth()->guard('web')->user()->avatar }}"/>
             </a>
-            <a class="btn btn-sm btn-success mr-2" href="/post/create">Create Post</a>
+            <a wire:navigate class="btn btn-sm btn-success mr-2" href="/post/create">Create Post</a>
             <form action="/logout" method="POST" class="d-inline">
               @csrf
               <button class="btn btn-sm btn-secondary">Sign Out</button>
@@ -63,10 +69,10 @@
        role="alert"
        @class([
         'alert alert-dismissible text-center fade show',
-        'alert-success' => session('status') === 'success',
-        'alert-danger' => session('status') === 'failed',
+        'alert-success' => session('message.status') === 'success',
+        'alert-danger' => session('message.status') === 'failed',
        ])>
-        {{ session('message') }}
+        {{ session('message.text') }}
       </div>
     @endif
 

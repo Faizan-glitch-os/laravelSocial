@@ -16,19 +16,19 @@
           @endif
           @endcannot
           @can('view', $sharedData['user'])
-            <a href="/profile/upload-avatar" class="btn btn-secondary btn-sm">Manage Avatar</a>
+            <a wire:navigate href="/profile/upload-avatar" class="btn btn-secondary btn-sm">Manage Avatar</a>
           @endcan
       </h2>
       <div class="profile-nav nav nav-tabs pt-2 mb-4">
-        <a href="/profile/{{ $sharedData['user']->id }}/"
+        <a wire:navigate href="/profile/{{ $sharedData['user']->id }}/"
         @class(['profile-nav-link nav-item nav-link', Request::segment(3) === null => 'active'])>
             Posts: {{ $sharedData['postsCount'] }}
         </a>
-        <a href="/profile/{{ $sharedData['user']->id }}/followers"
+        <a wire:navigate href="/profile/{{ $sharedData['user']->id }}/followers"
         @class(['profile-nav-link nav-item nav-link', Request::segment(3) === 'followers' => 'active'])>
             Followers: {{ $sharedData['followers'] }}
         </a>
-        <a href="/profile/{{ $sharedData['user']->id }}/following"
+        <a wire:navigate href="/profile/{{ $sharedData['user']->id }}/following"
         @class(['profile-nav-link nav-item nav-link', Request::segment(3) === 'following' => 'active'])>
             Following: {{ $sharedData['following'] }}
         </a>

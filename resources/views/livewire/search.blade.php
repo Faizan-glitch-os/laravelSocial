@@ -29,7 +29,7 @@
     </div>
 
             @foreach($users as $user)
-            <a x-on:click.prevent="isOpen = false; Livewire.navigate('/profile/{{$user->id}}')" href="/profile/{{$user->id}}" class="list-group-item list-group-item-action">
+            <a x-on:click.prevent="isOpen = ! isOpen; Livewire.navigate('/profile/{{$user->id}}')" href="/profile/{{$user->id}}" class="list-group-item list-group-item-action">
         <img class="avatar-tiny" src="{{$user->avatar}}"> <strong>{{$user->username}}</strong>
       </a>
             @endforeach
