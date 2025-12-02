@@ -9,10 +9,7 @@
               <button class="btn btn-danger btn-sm">Stop Following <i class="fas fa-user-times"></i></button>
             </form>
           @else
-            <form class="ml-2 d-inline" action="/profile/{{ $sharedData['user']->id }}/follow" method="POST">
-            @csrf
-              <button class="btn btn-primary btn-sm">Follow <i class="fas fa-user-plus"></i></button>
-            </form>
+            <livewire:add-follow :userId="$sharedData['user']->id"/>
           @endif
           @endcannot
           @can('view', $sharedData['user'])

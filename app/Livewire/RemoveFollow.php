@@ -4,10 +4,10 @@ namespace App\Livewire;
 
 use Livewire\Component;
 
-class Unfollow extends Component
+class RemoveFollow extends Component
 {
     public function render()
     {
-        return view('livewire.unfollow');
+        return view('livewire.remove-follow');
     }
 }
