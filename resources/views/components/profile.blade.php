@@ -29,4 +29,5 @@
       </div>
 
       {{ $slot }}
+      
 </x-layout>
