@@ -1,5 +1,5 @@
 <div>
-    <div class="list-group my-2">
+    <div class="list-group">
 
         @foreach($posts as $post)
         <a wire:navigate href="/post/{{ $post->id }}/view" class="list-group-item list-group-item-action">

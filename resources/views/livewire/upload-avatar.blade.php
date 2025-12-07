@@ -40,7 +40,6 @@
 
     {{-- Submit --}}
     <button wire:loading.attr="disabled" wire:target="avatar" class="btn btn-primary" type="submit">
-        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
         <span role="status">Submit</span>
     </button>
 </form>

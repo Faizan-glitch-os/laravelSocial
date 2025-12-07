@@ -2,7 +2,8 @@
         @csrf
         <div class="form-group">
           <label for="post-title" class="text-muted mb-1"><small>Title</small></label>
-          <input wire:model="title" required name="title" id="post-title" class="form-control form-control-lg form-control-title" type="text" placeholder="" autocomplete="off" />
+          <input max="15" wire:model="title" required name="title" id="post-title" class="form-control form-control-lg form-control-title" type="text" placeholder="" autocomplete="off" />
+          <small>Character count: <span class="text-danger" x-text="20 - $wire.title.length"></span></small>
         @error('title')
           <div class="alert alert-danger small">{{ $message }}</div>
         @enderror

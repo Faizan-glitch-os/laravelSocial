@@ -13,17 +13,17 @@
             <a wire:navigate href="/profile/upload-avatar" class="btn btn-secondary btn-sm">Manage Avatar</a>
           @endcan
       </h2>
-      <div class="profile-nav nav nav-tabs pt-2 mb-4">
-        <a wire:navigate href="/profile/{{ $sharedData['user']->id }}/"
-        @class(['profile-nav-link nav-item nav-link', Request::segment(3) === null => 'active'])>
+      <div class="profile-nav nav nav-pills pt-2">
+        <a wire:navigate href="/profile/{{ $sharedData['user']->id }}/" wire:current.exact="active"
+        @class(['profile-nav-link nav-item nav-link'])>
             Posts: {{ $sharedData['postsCount'] }}
         </a>
-        <a wire:navigate href="/profile/{{ $sharedData['user']->id }}/followers"
-        @class(['profile-nav-link nav-item nav-link', Request::segment(3) === 'followers' => 'active'])>
+        <a wire:navigate href="/profile/{{ $sharedData['user']->id }}/followers" wire:current.exact="active"
+        @class(['profile-nav-link nav-item nav-link'])>
             Followers: {{ $sharedData['followers'] }}
         </a>
-        <a wire:navigate href="/profile/{{ $sharedData['user']->id }}/following"
-        @class(['profile-nav-link nav-item nav-link', Request::segment(3) === 'following' => 'active'])>
+        <a wire:navigate href="/profile/{{ $sharedData['user']->id }}/following" wire:current.exact="active"
+        @class(['profile-nav-link nav-item nav-link'])>
             Following: {{ $sharedData['following'] }}
         </a>
       </div>
