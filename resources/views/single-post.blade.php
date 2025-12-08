@@ -27,18 +27,22 @@
       <p class="card-text">{!! $post->body !!}</p>
 
       <!-- Actions -->
-      <div class="d-flex justify-content-between mt-3">
+      <div class="d-flex justify-content-end mt-4">
         @can('update', $post)
-          <div>
-            <a wire:navigate href="/post/{{ $post->id }}/edit" class="btn btn-sm btn-outline-info">
-              <i class="fas fa-edit"></i>
+          <div class="btn-group" role="group">
+            <!-- Edit Button -->
+            <a wire:navigate href="/post/{{ $post->id }}/edit" 
+            class="btn btn-sm btn-secondary text-white fw-semibold shadow-sm px-3">
+              <i class="fas fa-edit me-1"></i> Edit
             </a>
-            <livewire:delete-post :post="$post"/>
+
+            <!-- Delete Button -->
+            <livewire:delete-post :post="$post" />
           </div>
-        @endcan
-      </div>
+  @endcan
+</div>
+
     </div>
   </div>
 </div>
-
 </x-layout>

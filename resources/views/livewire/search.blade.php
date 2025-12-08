@@ -22,7 +22,7 @@
 
             @if (count($users) > 0)
             <div class="list-group shadow-sm">
-      <div class="list-group-item active"><strong>Search Results</strong>
+      <div class="list-group-item"><strong>Search Results</strong>
     
         ({{count($users)}} {{count($users) > 1 ? "results" : "result"}} found)
 

@@ -1,6 +1,6 @@
 <div class="container d-flex justify-content-center my-5">
     <div class="card shadow-lg" style="max-width: 500px; width: 100%;">
-        <div class="card-header text-center bg-primary text-white">
+        <div class="card-header text-center bg-secondary text-white">
             <h5 class="mb-0">Update Your Avatar</h5>
         </div>
 

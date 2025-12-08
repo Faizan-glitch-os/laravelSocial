@@ -17,64 +17,117 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/main.css" />
-
   </head>
   <body>
     <header>
-      <nav class="navbar bg-danger">
-        <div class="container-fluid">
-          <a class="navbar-brand" wire:navigate href="/">
-            <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" width="30" height="24" class="d-inline-block align-text-top">
-          </a>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+    <div class="container-fluid">
 
-          <div class="d-flex gap-2">
-            @auth
+      <!-- Brand -->
+      <a class="navbar-brand d-flex align-items-center" wire:navigate href="/">
+        <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" width="35" height="30" class="me-2">
+        <span class="fw-bold">Mini Social</span>
+      </a>
+
+      <!-- Toggle for mobile -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Navbar content -->
+      <div class="collapse navbar-collapse justify-content-end" id="navbarMain">
+        <ul class="navbar-nav align-items-center gap-3">
+
+          @auth
+          <!-- Search -->
+          <li class="nav-item">
             @persist('search')
               <livewire:search />
             @endpersist()
+          </li>
+
+          <!-- Chat -->
+          <li class="nav-item">
             @persist('chat')
               <livewire:chat />
             @endpersist()
+          </li>
 
-            <a wire:navigate href="/profile/{{ auth()->guard('web')->user()->id }}" class="mr-2">
+          <!-- Profile Avatar -->
+          <li class="nav-item">
+            <a wire:navigate href="/profile/{{ auth()->guard('web')->user()->id }}" class="nav-link p-0">
               <img title="My Profile"
-              data-toggle="tooltip"
-              data-placement="bottom"
-              class="rounded-circle" 
-              width="30" height="30"
-              src="{{ auth()->guard('web')->user()->avatar }}"/>
+                   class="rounded-circle border border-light shadow-sm"
+                   width="36" height="36"
+                   src="{{ auth()->guard('web')->user()->avatar }}" alt="My Profile"/>
             </a>
+          </li>
 
-            <a wire:navigate class="btn btn-sm btn-success mr-2" href="/post/create">Create Post</a>
+          <!-- Create Post -->
+          <li class="nav-item">
+            <a wire:navigate href="/post/create" class="btn btn-sm btn-light fw-bold shadow-sm">
+              <i class="fas fa-plus me-1"></i> Create Post
+            </a>
+          </li>
+
+          <!-- Sign Out -->
+          <li class="nav-item">
             <form action="/logout" method="POST" class="d-inline">
               @csrf
-              <button class="btn btn-sm btn-secondary">Sign Out</button>
+              <button class="btn btn-sm btn-outline-light fw-bold">Sign Out</button>
             </form>
+          </li>
           @endauth
-          </div>
-          
-        </div>
-      </nav>
-    </header>
-    <!-- header ends here -->
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+<!-- header ends here -->
 
     @if (session()->has('message'))
-      <div id="autoDismissibleAlert"
-       role="alert"
-       @class([
-        'alert alert-dismissible text-center fade show',
+  <div 
+    x-data="{ show: true }" 
+    x-init="setTimeout(() => show = false, 3000)" 
+    x-show="show" 
+    x-transition.opacity.duration.500ms
+    class="position-fixed bottom-0 end-0 p-3" 
+    style="z-index: 1050;"
+  >
+    <div 
+      role="alert"
+      @class([
+        'alert alert-dismissible fade show d-flex align-items-center shadow-lg py-3 px-4',
         'alert-success' => session('message.status') === 'success',
         'alert-danger' => session('message.status') === 'failed',
-       ])>
-        {{ session('message.text') }}
-      </div>
-    @endif
+      ])>
+      
+      <!-- Icon -->
+      @if(session('message.status') === 'success')
+        <i class="fas fa-check-circle me-2 text-success"></i>
+      @elseif(session('message.status') === 'failed')
+        <i class="fas fa-times-circle me-2 text-danger"></i>
+      @endif
+
+      <!-- Message Text -->
+      <span class="fw-semibold">{{ session('message.text') }}</span>
+
+    </div>
+  </div>
+@endif
+
 
     {{ $slot }}
 
-    <footer class="border-top text-center small text-muted py-3">
-        <p class="m-0">Copyright &copy; 2022 <a href="/" class="text-muted">OurApp</a>. All rights reserved.</p>
-    </footer>
+    <footer class="bg-light border-top py-4 mt-5">
+  <div class="container text-center">
+    <p class="mb-1 text-muted small">
+      &copy; 2025 <a href="/" class="fw-bold text-decoration-none text-primary">Mini Social</a>. All rights reserved.
+    </p>
+  </div>
+</footer>
+
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
