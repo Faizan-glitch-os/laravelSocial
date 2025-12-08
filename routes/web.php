@@ -30,7 +30,9 @@ Route::get('/profile/{user}/following', [AuthController::class, 'showFollowing']
 Route::get('/profile/upload-avatar', [RouteController::class, 'showAvatarForm'])->middleware('auth');
 Route::post('/profile/upload-avatar', [RouteController::class, 'uploadAvatar'])->middleware('auth');
 Route::post('/register', [AuthController::class, 'register'])->middleware('guest');
+Route::view('/register', 'homepage-loggedout')->middleware('guest');
 Route::post('/login', [AuthController::class, 'login'])->middleware('guest');
+Route::view('/login', 'homepage-loggin')->middleware('guest');
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
 Route::get('/profile/{user}', [AuthController::class, 'showProfile'])->middleware(['auth']);
 

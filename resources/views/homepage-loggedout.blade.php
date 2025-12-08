@@ -1,45 +1,89 @@
 <x-layout>
-    <div class="container py-md-5">
-      <div class="row align-items-center">
-        <div class="col-lg-7 py-3 py-md-5">
-          <h1 class="display-3">Remember Writing?</h1>
-          <p class="lead text-muted">Are you sick of short tweets and impersonal &ldquo;shared&rdquo; posts that are reminiscent of the late 90&rsquo;s email forwards? We believe getting back to actually writing is the key to enjoying the internet again.</p>
-        </div>
-        <div class="col-lg-5 pl-lg-5 pb-3 py-lg-5">
+    <div class="container py-5">
+  <div class="row justify-content-center align-items-center">
+    <!-- Left side: Hero text -->
+    <div class="col-lg-6 text-center text-lg-start mb-4 mb-lg-0">
+      <h1 class="display-4 fw-bold text-primary">Join OurApp Today</h1>
+      <p class="lead text-muted">
+        Share your thoughts, connect with friends, and rediscover the joy of writing.
+      </p>
+      <img src="/images/register-illustration.svg" alt="Register illustration" class="img-fluid mt-3 d-none d-lg-block">
+    </div>
+
+    <!-- Right side: Registration form -->
+    <div class="col-lg-6">
+      <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-body p-5">
+          <h3 class="text-center mb-4">Create Your Account</h3>
+
           <form action="/register" method="POST" id="registration-form">
             @csrf
-            <div class="form-group">
-              <label for="username-register" class="text-muted mb-1"><small>Username</small></label>
-              <input value="{{ old('username') }}" name="username" id="username-register" class="form-control" type="text" placeholder="Pick a username" autocomplete="off" />
+
+            <!-- Username -->
+            <div class="mb-3">
+              <label for="username-register" class="form-label">Username</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                <input value="{{ old('username') }}" name="username" id="username-register"
+                       class="form-control" type="text" placeholder="Pick a username" autocomplete="off">
+              </div>
               @error('username')
-                <p class="alert alert-danger small">{{ $message }}</p>
+                <p class="alert alert-danger small mt-2">{{ $message }}</p>
               @enderror
             </div>
 
-            <div class="form-group">
-              <label for="email-register" class="text-muted mb-1"><small>Email</small></label>
-              <input value="{{ old('email') }}" name="email" id="email-register" class="form-control" type="text" placeholder="you@example.com" autocomplete="off" />
-            @error('email')
-                <p class="alert alert-danger small">{{ $message }}</p>
+            <!-- Email -->
+            <div class="mb-3">
+              <label for="email-register" class="form-label">Email</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                <input value="{{ old('email') }}" name="email" id="email-register"
+                       class="form-control" type="email" placeholder="you@example.com" autocomplete="off">
+              </div>
+              @error('email')
+                <p class="alert alert-danger small mt-2">{{ $message }}</p>
               @enderror
             </div>
 
-            <div class="form-group">
-              <label for="password-register" class="text-muted mb-1"><small>Password</small></label>
-              <input name="password" id="password-register" class="form-control" type="password" placeholder="Create a password" />
-            @error('password')
-                <p class="alert alert-danger small">{{ $message }}</p>
+            <!-- Password -->
+            <div class="mb-3">
+              <label for="password-register" class="form-label">Password</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                <input name="password" id="password-register"
+                       class="form-control" type="password" placeholder="Create a password">
+              </div>
+              @error('password')
+                <p class="alert alert-danger small mt-2">{{ $message }}</p>
               @enderror
             </div>
 
-            <div class="form-group">
-              <label for="password-register-confirm" class="text-muted mb-1"><small>Confirm Password</small></label>
-              <input name="password_confirmation" id="password-register-confirm" class="form-control" type="password" placeholder="Confirm password" />
+            <!-- Confirm Password -->
+            <div class="mb-4">
+              <label for="password-register-confirm" class="form-label">Confirm Password</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                <input name="password_confirmation" id="password-register-confirm"
+                       class="form-control" type="password" placeholder="Confirm password">
+              </div>
             </div>
 
-            <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">Sign up for OurApp</button>
+            <!-- Submit -->
+            <button type="submit" class="btn btn-success w-100 py-3 fw-bold">
+              <i class="fas fa-user-plus me-2"></i> Sign up for OurApp
+            </button>
           </form>
+
+          <!-- Extra links -->
+          <div class="text-center mt-4">
+            <small class="text-muted">Already have an account?
+              <a wire:navigate href="/login" class="text-primary fw-bold">Log in</a>
+            </small>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
+
 </x-layout>

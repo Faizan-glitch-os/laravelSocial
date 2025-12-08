@@ -1,22 +1,44 @@
 <x-layout docTitle="{{ $post->title }}">
-    <div class="container py-md-5 container--narrow">
-      <div class="d-flex justify-content-between">
-        <h2>{{ $post->title }}</h2>
+  <div class="container d-flex justify-content-center my-4">
+  <div class="card shadow-sm" style="max-width: 600px; width: 100%;">
+    <div class="card-body">
+      <!-- Header: Avatar + Username + Timestamp -->
+      <div class="d-flex align-items-center mb-3">
+        <a href="/profile/{{ $post->userBelongs->id }}">
+          <img src="{{ $post->userBelongs->avatar }}" 
+               alt="avatar" 
+               class="rounded-circle me-2" 
+               width="50" height="50">
+        </a>
+        <div>
+          <h6 class="mb-0">
+            <a href="/profile/{{ $post->userBelongs->id }}" class="text-dark fw-bold">
+              {{ $post->userBelongs->username }}
+            </a>
+          </h6>
+          <small class="text-muted">
+            {{ $post->created_at->diffForHumans() }}
+          </small>
+        </div>
+      </div>
+
+      <!-- Post Content -->
+      <h5 class="card-title">{{ $post->title }}</h5>
+      <p class="card-text">{!! $post->body !!}</p>
+
+      <!-- Actions -->
+      <div class="d-flex justify-content-between mt-3">
         @can('update', $post)
-          <span class="pt-2">
-            <a wire:navigate href="/post/{{ $post->id }}/edit" class="text-primary mr-2" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-edit"></i></a>
+          <div>
+            <a wire:navigate href="/post/{{ $post->id }}/edit" class="btn btn-sm btn-outline-info">
+              <i class="fas fa-edit"></i>
+            </a>
             <livewire:delete-post :post="$post"/>
-          </span>
+          </div>
         @endcan
       </div>
-
-      <p class="text-muted small mb-4">
-        <a href="/profile/{{ $post->userBelongs->id }}"><img class="avatar-tiny" src="{{ $post->userBelongs->avatar }}" /></a>
-        Posted by <a href="/profile/{{ $post->userBelongs->id }}">{{ $post->userBelongs->username }}</a> on {{ $post->created_at->format('n/j/Y') }}
-      </p>
-
-      <div class="body-content">
-        {!! $post->body !!}
-      </div>
     </div>
+  </div>
+</div>
+
 </x-layout>

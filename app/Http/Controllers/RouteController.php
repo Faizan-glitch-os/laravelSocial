@@ -17,7 +17,7 @@ class RouteController
             $posts = auth()->guard('web')->user()->feedPosts()->latest()->simplePaginate(5);
             return view('homepage-loggedin', ['posts' => $posts]);
         } else {
-            return view('homepage-loggedout');
+            return view('homepage-loggin');
         }
     }
 
