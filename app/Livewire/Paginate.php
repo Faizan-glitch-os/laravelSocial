@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Follow;
+use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -15,11 +16,11 @@ class Paginate extends Component
 
     public function mount()
     {
-        $user = auth('web')->user();
+        $user = User::find(request()->segment(2));
 
-        $postsCount = $user->userPosts()->get()->count();
-        $followers = $user->followers()->get()->count();
-        $following = $user->following()->get()->count();
+        $postsCount = $user->userPosts()->count();
+        $followers = $user->followers()->count();
+        $following = $user->following()->count();
         $isFollowed = Follow::where([['user_id', '=', auth('web')->user()->id], ['followed_user_id', '=', $user->id]])->count();
 
         $this->sharedData = [
@@ -34,6 +35,7 @@ class Paginate extends Component
     public function render()
     {
         $user = $this->sharedData['user'];
+
         switch ($this->type) {
             case 'posts':
                 $data = $user->userPosts()->latest()->paginate(5);
