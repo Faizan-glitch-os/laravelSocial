@@ -41,9 +41,6 @@
         Your feed shows the latest posts from people you follow.  
         Use the <strong>Search</strong> feature in the top menu to discover writers with similar interests and start following them.
       </p>
-      <a wire:navigate href="/search" class="btn btn-lg btn-primary mt-3 shadow-sm">
-        <i class="fas fa-search me-2"></i> Find People to Follow
-      </a>
     </div>
   @endif
 </div>

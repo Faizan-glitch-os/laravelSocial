@@ -31,9 +31,6 @@
         <div class="text-center my-5">
           <h4 class="fw-bold">You’re not following anyone yet</h4>
           <p class="text-muted">Discover new people and start following them to see their posts here.</p>
-          <a wire:navigate href="/search" class="btn btn-lg btn-primary shadow-sm mt-3">
-            <i class="fas fa-search me-2"></i> Find People
-          </a>
         </div>
       @endif
 

@@ -25,7 +25,7 @@
 
       <!-- Brand -->
       <a class="navbar-brand d-flex align-items-center" wire:navigate href="/">
-        <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" width="35" height="30" class="me-2">
+        <img src="/logo.png" width="35" height="30" class="me-2">
         <span class="fw-bold">Mini Social</span>
       </a>
 
@@ -126,6 +126,9 @@
       &copy; 2025 <a href="/" class="fw-bold text-decoration-none text-primary">Mini Social</a>. All rights reserved.
     </p>
   </div>
+  <div class="d-flex justify-content-center gap-3 mt-2">
+      <a href="https://www.flaticon.com/free-icons/network" title="network icons">Network icons created by prettycons - Flaticon</a>
+    </div>
 </footer>
 
 
